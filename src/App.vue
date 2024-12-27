@@ -1,14 +1,12 @@
 <template>
   <Navbar/>
-  <router-view />
-  <NewsLetter/>
+  <RouterView/>
   <Footer />
 </template>
 
 <script setup>
 import Footer from './components/Footer.vue';
 import Navbar from './components/Navbar.vue';
-import NewsLetter from './components/NewsLetter.vue';
 
 </script>
 <style>

@@ -24,10 +24,32 @@ const router = createRouter({
       component: () => import('../views/CodeView.vue'),
     },
     {
+      path: '/contributing',
+      name: 'contributing',
+      meta: {
+        title: 'Contributing Guideliens | OSCOV'
+      },
+      component: () => import('../views/GuidelineView.vue'),
+    },
+    {
       path: '/discord',
       name: 'documentation',
       beforeEnter(to, from, next) {
         window.location.href = 'https://discord.gg/N7FdTkJZWQ'
+      },
+    },
+    {
+      path: '/github',
+      name: 'github',
+      beforeEnter(to, from, next) {
+        window.location.href = 'https://github.com/Vedas-OSCOV'
+      },
+    },
+    {
+      path: '/issues',
+      name: 'issues',
+      beforeEnter(to, from, next) {
+        window.location.href = 'https://github.com/Vedas-OSCOV'
       },
     },
   ],
