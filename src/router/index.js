@@ -27,7 +27,7 @@ const router = createRouter({
       path: '/contributing',
       name: 'contributing',
       meta: {
-        title: 'Contributing Guideliens | OSCOV'
+        title: 'Contributing Guidelines | OSCOV'
       },
       component: () => import('../views/GuidelineView.vue'),
     },

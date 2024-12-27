@@ -27,7 +27,7 @@
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
             <a
-              href="#join"
+              href="https://discord.gg/N7FdTkJZWQ"
               class="inline-flex items-center px-8 py-3 rounded-full bg-black text-white text-lg font-medium hover:bg-gray-800 transition-colors group"
               @click.prevent="$emit('scrollTo', 'join')"
             >
