@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-full py-4 px-6 border-b border-gray-200">
+  <nav class="w-full py-4 px-6 border-b border-gray-200 bg-white sticky top-0 z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <!-- Logo/Brand -->
       <a href="#top" class="text-xl font-bold" @click.prevent="scrollToSection('top')">
@@ -38,9 +38,38 @@
       <div class="hidden lg:flex items-center gap-8">
         <div class="flex items-center gap-8">
           <template v-for="link in navLinks" :key="link.id || link.path">
-            <!-- Section Links -->
+            <!-- Home Link (Special Case) -->
+            <template v-if="link.name === 'Home'">
+              <RouterLink 
+                v-if="route.path !== '/'"
+                :to="link.path"
+                class="px-4 py-1.5 text-sm transition-all"
+                :class="[
+                  route.path === link.path
+                    ? 'bg-black text-white rounded-full'
+                    : 'text-gray-600 hover:text-black'
+                ]"
+              >
+                {{ link.name }}
+              </RouterLink>
+              <a 
+                v-else
+                :href="`#${link.id}`"
+                class="px-4 py-1.5 text-sm transition-all"
+                :class="[
+                  activeSection === link.id
+                    ? 'bg-black text-white rounded-full'
+                    : 'text-gray-600 hover:text-black'
+                ]"
+                @click.prevent="scrollToSection(link.id)"
+              >
+                {{ link.name }}
+              </a>
+            </template>
+            
+            <!-- Regular Section Links -->
             <a 
-              v-if="link.type === 'section'"
+              v-else-if="link.type === 'section'"
               :href="`#${link.id}`"
               class="px-4 py-1.5 text-sm transition-all"
               :class="[
@@ -53,7 +82,7 @@
               {{ link.name }}
             </a>
             
-            <!-- Route Links -->
+            <!-- Regular Route Links -->
             <RouterLink 
               v-else
               :to="link.path"
@@ -115,9 +144,39 @@
       >
         <div class="flex flex-col gap-4">
           <template v-for="link in navLinks" :key="link.id || link.path">
-            <!-- Section Links -->
+            <!-- Home Link (Special Case) -->
+            <template v-if="link.name === 'Home'">
+              <RouterLink 
+                v-if="route.path !== '/'"
+                :to="link.path"
+                class="text-sm transition-all"
+                :class="[
+                  route.path === link.path
+                    ? 'inline-block px-4 py-1.5 bg-black text-white rounded-full w-fit'
+                    : 'text-gray-600 hover:text-black'
+                ]"
+                @click="isOpen = false"
+              >
+                {{ link.name }}
+              </RouterLink>
+              <a 
+                v-else
+                :href="`#${link.id}`"
+                class="text-sm transition-all"
+                :class="[
+                  activeSection === link.id
+                    ? 'inline-block px-4 py-1.5 bg-black text-white rounded-full w-fit'
+                    : 'text-gray-600 hover:text-black'
+                ]"
+                @click.prevent="scrollToSection(link.id)"
+              >
+                {{ link.name }}
+              </a>
+            </template>
+            
+            <!-- Regular Section Links -->
             <a 
-              v-if="link.type === 'section'"
+              v-else-if="link.type === 'section'"
               :href="`#${link.id}`"
               class="text-sm transition-all"
               :class="[
@@ -130,7 +189,7 @@
               {{ link.name }}
             </a>
             
-            <!-- Route Links -->
+            <!-- Regular Route Links -->
             <RouterLink 
               v-else
               :to="link.path"
@@ -185,10 +244,10 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const isOpen = ref(false)
 const isDarkTheme = ref(false)
-const activeSection = ref('home')
+const activeSection = ref('')
 
 const navLinks = [
-  { name: 'Home', path: '/', type: 'route' },
+  { name: 'Home', id: 'home', path: '/', type: 'both' },
   { name: 'About Us', id: 'about', type: 'section' },
   { name: 'Events', id: 'events', type: 'section' },
   { name: 'Github', path: '/github', type: 'route' }
@@ -210,22 +269,25 @@ const toggleTheme = () => {
 
 // handle active section based on scroll position
 const handleScroll = () => {
+  // Only handle scroll-based active sections on homepage
+  if (route.path !== '/') return
+  
   const sections = navLinks
-    .filter(link => link.type === 'section')
+    .filter(link => link.type === 'section' || link.type === 'both')
     .map(link => ({
       id: link.id,
       element: document.getElementById(link.id)
     }))
     .filter(section => section.element)
 
+  // Find the current section
   const currentSection = sections.find(section => {
     const rect = section.element.getBoundingClientRect()
     return rect.top <= 100 && rect.bottom >= 100
   })
 
-  if (currentSection) {
-    activeSection.value = currentSection.id
-  }
+  // Update active section or clear if none found
+  activeSection.value = currentSection ? currentSection.id : ''
 }
 
 // close mobile menu when clicking outside
