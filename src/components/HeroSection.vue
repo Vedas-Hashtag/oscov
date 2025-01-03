@@ -1,6 +1,6 @@
 <template>
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen py-20 px-6 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section id="home" class="py-20 px-6 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
       <!-- Background Pattern -->
       <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1.5\'/%3E%3C/g%3E%3C/svg%3E'); background-repeat: repeat;"></div>

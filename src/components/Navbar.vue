@@ -118,13 +118,12 @@
           </button>
 
           <!-- Become a Member Button -->
-          <a 
-            href="#join"
+          <RouterLink 
+            to="/join"
             class="px-6 py-2 rounded-full border-2 border-black text-sm font-medium hover:bg-black hover:text-white transition-colors"
-            @click.prevent="scrollToSection('join')"
           >
-            Become a Member!
-          </a>
+              Become a Member!
+          </RouterLink>
         </div>
       </div>
     </div>
