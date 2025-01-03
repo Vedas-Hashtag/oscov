@@ -119,7 +119,7 @@
 
           <!-- Become a Member Button -->
           <a 
-            href="#join"
+            href="https://google.com"
             class="px-6 py-2 rounded-full border-2 border-black text-sm font-medium hover:bg-black hover:text-white transition-colors"
             @click.prevent="scrollToSection('join')"
           >
