@@ -52,6 +52,13 @@ const router = createRouter({
         window.location.href = 'https://github.com/Vedas-OSCOV'
       },
     },
+    {
+      path: '/join',
+      name: 'join',
+      beforeEnter(to, from, next) {
+        window.location.href = 'https://forms.gle/7WbrFkoxFoD6tZw9A'
+      },
+    },
   ],
 })
 
