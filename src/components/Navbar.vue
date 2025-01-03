@@ -222,13 +222,13 @@
               </svg>
             </button>
             
-            <a 
-              href="#join"
+            <RouterLink
+            to="/join"
               class="px-6 py-2 rounded-full border-2 border-black text-sm font-medium hover:bg-black hover:text-white transition-colors"
               @click.prevent="scrollToSection('join')"
             >
               Become a Member!
-            </a>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -238,7 +238,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
 const isOpen = ref(false)
